@@ -1,0 +1,31 @@
+name: Keep Render App Alive (Login)
+
+on:
+    schedule:
+        - cron: "*/10 * * * *" # Every 15 minutes
+    workflow_dispatch:
+
+jobs:
+    login-ping:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Send login POST request with dummy creds
+              run: |
+                  curl -X POST https://ripple-backend-ejk4.onrender.com/api/auth/login \
+                  -H "accept: application/json, text/plain, */*" \
+                  -H "accept-language: en-US,en;q=0.9" \
+                  -H "cache-control: no-cache" \
+                  -H "content-type: application/json" \
+                  -H "origin: https://ripple.nachiketgalande.site" \
+                  -H "pragma: no-cache" \
+                  -H "priority: u=1, i" \
+                  -H "referer: https://ripple.nachiketgalande.site/" \
+                  -H "sec-ch-ua: \"Chromium\";v=\"134\", \"Not:A-Brand\";v=\"24\", \"Google Chrome\";v=\"134\"" \
+                  -H "sec-ch-ua-mobile: ?0" \
+                  -H "sec-ch-ua-platform: \"Windows\"" \
+                  -H "sec-fetch-dest: empty" \
+                  -H "sec-fetch-mode: cors" \
+                  -H "sec-fetch-site: cross-site" \
+                  -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" \
+                  -H "x-current-user-id: 27" \
+                  --data-raw '{"email":"dummy@email.com","password":"dummyPassword123"}'
